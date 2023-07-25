@@ -22,21 +22,25 @@ public class SampleServer {
         System.out.println(srvSocket.getSoTimeout());
 
         while(true) {
-            Socket socket = srvSocket.accept();
-            System.out.println("Got a connection");
+            try {
+                Socket socket = srvSocket.accept();
+                System.out.println("Got a connection");
 
-            InputStream inStream = socket.getInputStream();
-            ObjectInputStream objInStream = new ObjectInputStream(inStream);
+                InputStream inStream = socket.getInputStream();
+                ObjectInputStream objInStream = new ObjectInputStream(inStream);
 
-            String inMessage = (String)objInStream.readObject();
-            System.out.println(inMessage);
-            String outMessage = inMessage + inMessage;
+                String inMessage = (String)objInStream.readObject();
+                System.out.println(inMessage);
+                String outMessage = inMessage + inMessage;
 
-            OutputStream outStream = socket.getOutputStream();
-            ObjectOutputStream objOutStream = new ObjectOutputStream(outStream);
-            objOutStream.writeObject(outMessage);
-        
-            socket.close();
+                OutputStream outStream = socket.getOutputStream();
+                ObjectOutputStream objOutStream = new ObjectOutputStream(outStream);
+                objOutStream.writeObject(outMessage);
+            
+                socket.close();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
         }
 
         //srvSocket.close();
