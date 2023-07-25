@@ -3,6 +3,8 @@ package SampleNet;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -18,16 +20,25 @@ public class SampleServer {
         System.out.println(srvSocket.getSoTimeout());
         //srvSocket.setSoTimeout(5000);
         System.out.println(srvSocket.getSoTimeout());
-        Socket socket = srvSocket.accept();
-        System.out.println("Got a connection");
 
-        InputStream inStream = socket.getInputStream();
-        ObjectInputStream objInStream = new ObjectInputStream(inStream);
+        while(true) {
+            Socket socket = srvSocket.accept();
+            System.out.println("Got a connection");
 
-        String inMessage = (String)objInStream.readObject();
-        System.out.println(inMessage);
+            InputStream inStream = socket.getInputStream();
+            ObjectInputStream objInStream = new ObjectInputStream(inStream);
 
-        socket.close();
-        srvSocket.close();
+            String inMessage = (String)objInStream.readObject();
+            System.out.println(inMessage);
+            String outMessage = inMessage + inMessage;
+
+            OutputStream outStream = socket.getOutputStream();
+            ObjectOutputStream objOutStream = new ObjectOutputStream(outStream);
+            objOutStream.writeObject(outMessage);
+        
+            socket.close();
+        }
+
+        //srvSocket.close();
     } 
 }

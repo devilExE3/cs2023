@@ -1,6 +1,8 @@
 package SampleNet;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.InetAddress;
@@ -8,7 +10,7 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 public class SampleClient {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
         System.out.println("Hello to SampleClient");
         InetAddress inetAddress = InetAddress.getLocalHost();
         System.out.println(inetAddress);
@@ -23,6 +25,10 @@ public class SampleClient {
         System.out.println(myMessage);
         objOutStream.writeObject(myMessage);
         
+        InputStream inStream = socket.getInputStream();
+        ObjectInputStream objInStream = new ObjectInputStream(inStream);
+        String inMessage = (String)objInStream.readObject();
+        System.out.println(inMessage);
         
         socket.close();
     } 
