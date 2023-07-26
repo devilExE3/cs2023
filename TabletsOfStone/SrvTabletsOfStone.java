@@ -25,8 +25,9 @@ public class SrvTabletsOfStone {
         ServerSocket srvSocket = new ServerSocket(5025);
 
         while(true) {
+            Socket socket = srvSocket.accept();
+            
             try {
-                Socket socket = srvSocket.accept();
                 System.out.println("Got a connection");
 
                 InputStream inStream = socket.getInputStream();
@@ -39,11 +40,11 @@ public class SrvTabletsOfStone {
                 OutputStream outStream = socket.getOutputStream();
                 ObjectOutputStream objOutStream = new ObjectOutputStream(outStream);
                 objOutStream.writeObject(outMessage);
-            
-                socket.close();
             } catch(Exception e) {
                 System.out.printf("Exception!! %s\n", e.getMessage());
             }
+
+            socket.close();
         }
     }
 }

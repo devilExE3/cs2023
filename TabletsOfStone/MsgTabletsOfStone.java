@@ -31,12 +31,12 @@ public class MsgTabletsOfStone implements Serializable {
         _msgData = msgData;
     }
 
-    public void writeObject(ObjectOutputStream ooStream) throws IOException {
+    private void writeObject(ObjectOutputStream ooStream) throws IOException {
         ooStream.writeObject(_msgType);
         ooStream.writeObject(_msgData);
     }
 
-    public void readObject(ObjectInputStream oiStream) throws ClassNotFoundException, IOException {
+    private void readObject(ObjectInputStream oiStream) throws ClassNotFoundException, IOException {
         _msgType = (Integer)oiStream.readObject();
         _msgData = (String)oiStream.readObject();
     }
