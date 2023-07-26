@@ -1,6 +1,13 @@
 package TabletsOfStone;
 
-public class MsgTabletsOfStone {
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
+public class MsgTabletsOfStone implements Serializable {
+    private static final long serialVersionUID = 1;
+
     private Integer _msgType;
     private String _msgData;
 
@@ -22,5 +29,15 @@ public class MsgTabletsOfStone {
     public MsgTabletsOfStone(int msgType, String msgData) {
         _msgType = msgType;
         _msgData = msgData;
+    }
+
+    public void writeObject(ObjectOutputStream ooStream) throws IOException {
+        ooStream.writeObject(_msgType);
+        ooStream.writeObject(_msgData);
+    }
+
+    public void readObject(ObjectInputStream oiStream) throws ClassNotFoundException, IOException {
+        _msgType = (Integer)oiStream.readObject();
+        _msgData = (String)oiStream.readObject();
     }
 }
