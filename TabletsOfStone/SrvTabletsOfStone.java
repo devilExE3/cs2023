@@ -85,10 +85,10 @@ public class SrvTabletsOfStone {
         case 2: //Logout:
             outMessage = processMessageLogout(inMessage.getName());
             break;
-        case 3: //Send:
+        case 4: //Send:
             outMessage = processMessageSend(inMessage.getFrom(), inMessage.getTo(), inMessage);
             break;
-        case 4: //Receive:
+        case 3: //Receive:
             outMessage = processMessageReceive(inMessage.getName());
             break;
         case 0: //Status:
@@ -142,10 +142,6 @@ public class SrvTabletsOfStone {
         }
         
         Queue<MsgTabletsOfStone> msgQueue = _msgQueues.get(to);
-        if (msgQueue == null) {
-            msgQueue = new LinkedList<MsgTabletsOfStone>();
-            _msgQueues.put(to, msgQueue);
-        }
         msgQueue.add(message);
         return new MsgTabletsOfStone(0, "[Success] OK!");
     }
@@ -184,7 +180,7 @@ public class SrvTabletsOfStone {
      * @return the server status string.
      */
     public static String serverStatusString() {
-        String info = String.format("----[MsgQueue: %d entries]----\n", _msgQueues.size());
+        String info = String.format("----[Logged in: %d users]----\n", _msgQueues.size());
         for(Map.Entry<String, Queue<MsgTabletsOfStone>> kvp: _msgQueues.entrySet()) {
             info += String.format("%-25s : ", kvp.getKey().toString());
             info += String.format("%d messages\n", kvp.getValue().size());
