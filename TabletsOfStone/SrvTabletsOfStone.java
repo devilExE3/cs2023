@@ -34,7 +34,7 @@ public class SrvTabletsOfStone {
         while(true) {
             Socket socket = null;
             
-            try {
+        try {
                 // Wait for the socket connecting to a client
                 socket = server.accept();
                 System.out.printf(">---- %s : ", socket.getInetAddress().getHostAddress());
@@ -59,7 +59,7 @@ public class SrvTabletsOfStone {
                 // Print the updated state of the server
                 System.out.printf("----> OK\n");
             } catch (Exception e) {
-                System.out.printf("---->", e.getMessage());
+                System.out.printf("----> %s\n", e.getMessage());
             }
             
             if (socket != null) {
