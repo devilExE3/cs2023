@@ -21,7 +21,7 @@ public class CliTabletsOfStone {
         OutputStream outStr = socket.getOutputStream();
         ObjectOutputStream objOutStream = new ObjectOutputStream(outStr);
 
-        MsgTabletsOfStone myMessage = new MsgTabletsOfStone(1, "ThisIsMe");
+        MsgTabletsOfStone myMessage = new MsgTabletsOfStone(0, "ThisIsMe");
         System.out.println(myMessage);
         objOutStream.writeObject(myMessage);
         
