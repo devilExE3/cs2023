@@ -9,7 +9,7 @@ import java.net.Socket;
 
 public class CliTabletsOfStone {
 
-    private static final String _SERVER_ADDRESS = "192.168.5.157";
+    private static final String _SERVER_ADDRESS = "192.168.5.157"; // "20.3.85.95"
     private static final int _SERVER_PORT = 5025;
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
