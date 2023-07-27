@@ -38,9 +38,10 @@ public class SampleServer {
                 objOutStream.writeObject(outMessage);
             
                 socket.close();
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
+            } catch(Exception e) {
+                System.out.printf("Exception!! %s\n", e.getMessage());
             }
+            
         }
 
         //srvSocket.close();
