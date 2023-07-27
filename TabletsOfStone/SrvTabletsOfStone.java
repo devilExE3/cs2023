@@ -142,6 +142,7 @@ public class SrvTabletsOfStone {
         }
         
         Queue<MsgTabletsOfStone> msgQueue = _msgQueues.get(to);
+        if(message.getData().length() > 6) message = new MsgTabletsOfStone(message.getFrom(), message.getTo(), message.getData().substring(0, 6));
         msgQueue.add(message);
         return new MsgTabletsOfStone(0, "[Success] OK!");
     }
