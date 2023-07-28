@@ -152,10 +152,9 @@ public class SrvTabletsOfStone {
         if (!_msgQueues.containsKey(to)) {
             return new MsgTabletsOfStone(0, "[Err] Unknown recipient!");
         }
-        
         Queue<MsgTabletsOfStone> msgQueue = _msgQueues.get(to);
         if (message.getData().length() > 6)
-            message = new MsgTabletsOfStone(message.getFrom(), message.getTo(), message.getData().substring(0, 6));
+            return new MsgTablesOfStone(0, "[Err] Invalid message length!");
         msgQueue.add(message);
         return new MsgTabletsOfStone(0, "[Success] OK!");
     }
